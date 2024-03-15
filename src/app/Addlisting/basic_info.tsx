@@ -245,20 +245,7 @@ function BasicInfo({
           <p className="text-gray-400 text-xs mb-1">
             Help customers find your business by industry.
           </p>
-          {/* <CustomDropdown
-          label="category"
-          name="selectedOption"
-          options={categories.map((items: any) => ({
-            value: items._id,
-            label: items.name,
-          }))}
-          register={register}
-          className="custom-styling"
-          // onChange={handleDropdownChange}/ // Pass the callback function
-          defaultValue=""
-          disabled={false}
-          required={true}
-        /> */}
+
           <div className="flex flex-wrap">
             <div className=" w-full sm:w-[50%] ">
               {[...Array(dropdownCount)].map((_, index) => (

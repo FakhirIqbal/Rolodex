@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import BusinessHours from "./businessHours";
 import NavBar from "@/components/Header/header";
 import Footer from "@/components/footer/footer";
 import Navigation from "@/components/ui/navigation";
@@ -194,12 +195,24 @@ function Page() {
     );
   }
   
+  
+  
   return (
     <main>
       <NavBar />
       <div className="max-w-[1240px]  mx-auto mb-40 p-4 xl:p-0">
         <Navigation title1={"Home"} title2={"Add listing"} />
-        <Heading type={"subheading"}> Add listing</Heading>
+
+
+        <div className="xl:flex flex-wrap justify-center hidden  rounded-lg pt-5 pb-5 w-full sticky top-0 shadow-md bg-white z-10 xl:w-4/6 xl:gap-10 xl:block">
+            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 100, behavior: 'smooth' }); }} >About</h1>
+            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 1280, behavior: 'smooth' }); }}>Location</h1>
+            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 1925, behavior: 'smooth' }); }}>Hour</h1>
+            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 2100, behavior: 'smooth' }); }}>Contact Me</h1>
+            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 2600, behavior: 'smooth' }); }}>More</h1>
+
+        </div>
+
         <div className="sm:grid sm:grid-cols-3 flex flex-col-reverse gap-4 ">
           <form onSubmit={handleSubmit(onSubmit)} className="col-span-2 mt-4">
             <BasicInfo
@@ -217,7 +230,7 @@ function Page() {
               updateDropdownValue={updateDropdownValue}
             />
             <div className="flex flex-col space-y-6 rounded-lg shadow-md p-6 mt-12">
-            
+            <BusinessHours />
             </div>
             
             <Contactdetail register={register} errors={errors} />
