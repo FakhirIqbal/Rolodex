@@ -77,11 +77,14 @@ const ProductImageInput = ({
               onClick={() => {
                 handleImageClick(fileInputRef, selectedImage);
               }}
-              className={"!rounded-full !bg-none !text-sm"}
+              className={"!rounded-full !bg-none !text-sm bg-white flex items-center flex-col justify-center"}
             >
-              <IoMdImages className="text-4xl" />
+              <span className="text-black">Drag a photo here</span>
+              <span className="text-black font-semibold">OR</span>
+            <span className="text-black text-md text-center flex items-center font-semibold">
+            <IoMdImages className="text-4xl text-black me-2" /> Select a photo
+            </span>
             </Button>
-            <p className="text-black text-sm text-center">Upload your business card and company Logo here</p>
           </div>
         )}
         <input
@@ -93,24 +96,6 @@ const ProductImageInput = ({
             handleFileChange(e, setSelectedImage);
           }}
         />
-      </div>
-      <div className="w-full mt-1">
-        <label className={`block text-sm  font-semibold `}>
-          {` Image ${index + 1} Description*`}
-        </label>
-        <textarea
-          //  {...register("description", {
-          //    required: `Description  is required`,
-          //    maxLength: 8000,
-          //    minLength: 4,
-          //  })}
-          name={"description"}
-          placeholder="Image description..."
-          className="border-2 text-sm my-1 w-full focus:ring-0 focus:border-primary   p-4 border-gray-200  rounded-xl resize-none"
-          id=""
-          cols={30}
-          rows={2}
-        ></textarea>
       </div>
     </div>
   );

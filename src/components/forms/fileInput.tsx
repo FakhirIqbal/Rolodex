@@ -78,9 +78,9 @@ const FileInput = ({
               onClick={() => {
                 handleImageClick(fileInputRef, selectedImage);
               }}
-              className={"!rounded-full !bg-none !text-sm"}
+              className={"!rounded-full !bg-none !text-sm !bg-gray-300 flex items-center flex-col justify-center"}
             >
-              <IoMdImages className="text-4xl" />
+              <IoMdImages className="text-4xl text-black" />
             </Button>
             <p className="text-[#25AEE1] text-sm text-center">Upload your business card and company Logo here</p>
           </div>

@@ -7,7 +7,11 @@ import RadioInput from "@/components/forms/radioinput";
 import Dropdown from "@/components/ui/custom_dropdown";
 import axios from "axios";
 import { Api } from "@/utils/api";
-import { IoIosInformationCircleOutline } from "react-icons/io";
+import {
+  IoIosInformationCircleOutline,
+  IoMdAdd,
+  IoMdClose,
+} from "react-icons/io";
 import { MdAddBox } from "react-icons/md";
 import FileInput from "@/components/forms/fileInput";
 import ImageInput from "@/components/forms/imageInput";
@@ -17,6 +21,8 @@ import { useForm } from "react-hook-form";
 import ProductTextFeild from "@/components/forms/ProductTextField";
 // import AddProductModal from "@/components/modals/AddProductModal";
 import ProductImageInput from "@/components/forms/productImageIput";
+import Button from "@/components/ui/Button";
+import ServiceTextFeild from "@/components/forms/serviceTextField";
 
 function BasicInfo({
   register,
@@ -26,6 +32,7 @@ function BasicInfo({
   getValues,
 }: any) {
   const [open, setOpen] = useState(false);
+  const [serviceOpen, setServiceOpen] = useState(false);
   const [dropdownCount, setDropdownCount] = useState(1);
   const [categories, setcategories] = useState([]);
   const [selectedOption, setSelectedOption] = React.useState<string | null>(
@@ -34,6 +41,27 @@ function BasicInfo({
   const [selectedCompanyNature, setSelectedCompanyNature] = React.useState<
     string[]
   >([]);
+  const [selectedCategories, setselectedCategories] = useState<any>([
+    "Option 1",
+    "Option 2",
+    "Option 3",
+  ]);
+
+  const [serviceCategory, setServiceCategory] = useState<any>([]);
+
+  const addServiceCategory = (index: any) => {
+    setServiceCategory([...serviceCategory, selectedCategories[index]]);
+    const updatedSelectedCategories = [...selectedCategories];
+    updatedSelectedCategories.splice(index, 1);
+    setselectedCategories(updatedSelectedCategories);
+  };
+
+  const removeServiceCategory = (index: any) => {
+    setselectedCategories([...selectedCategories, serviceCategory[index]]);
+    const updatedServiceCategory = [...serviceCategory];
+    updatedServiceCategory.splice(index, 1);
+    setServiceCategory(updatedServiceCategory);
+  };
 
   useEffect(() => {
     axios
@@ -59,6 +87,16 @@ function BasicInfo({
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
+
+  const onServiceOpenModal = () => setServiceOpen(true);
+  const onServiceCloseModal = () => setServiceOpen(false);
+
+  // const [services, setServices] = useState<any>([]);
+
+  // const addService = (serviceData: any) => {
+  //   setServices([...services, serviceData]);
+  //   onServiceCloseModal();
+  // };
 
   function handleOptionClick(v: string | null) {
     setSelectedOption(v);
@@ -507,7 +545,7 @@ function BasicInfo({
                   </span>
                 </div>
               </div>
-              <div className="w-60 md:mt-6">
+              <div className="w-60 lg:mt-3 mt-2 flex items-end justify-between flex-col">
                 {[
                   {
                     fileInputRef: fileInputRef2,
@@ -526,6 +564,13 @@ function BasicInfo({
                     fileInputRef={items}
                   />
                 ))}
+                <Button
+                  type={"submit"}
+                  onClick={onCloseModal}
+                  className={"!px-12   !rounded-full"}
+                >
+                  Publish
+                </Button>
               </div>
             </div>
           </Modal>
@@ -553,8 +598,66 @@ function BasicInfo({
                 Add product
               </button>
             </div>
+
+            <Modal open={serviceOpen} onClose={onServiceCloseModal} center>
+              <div className="flex gap-4 flex-wrap">
+                <div className="mb-2">
+                  <div className="">
+                    <label className={`block text-sm mt-4 font-semibold `}>
+                      Start typing to search for service or type your service
+                    </label>
+                    <div className="w-full border-4 rounded-md py-2 px-4 min-h-[100px] w-100">
+                      <label>
+                        Start typing to search for service or type your service{" "}
+                      </label>
+                      <div className="flex">
+                        {serviceCategory.map((v: any, i: any) => (
+                          <span
+                            key={i}
+                            className="flex items-center mt-4 px-4 py-2 me-2 text-white rounded-[20px] bg-[#25AAE1]"
+                          >
+                            {v}{" "}
+                            <IoMdClose
+                              className="ms-4 cursor-pointer text-[25px] transition-all hover:text-[30px]"
+                              onClick={() => removeServiceCategory(i)}
+                            />
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="">
+                      {selectedCategories.map((val: any, index: any) => (
+                        <span key={index} className="flex items-center my-2 w-fit">
+                          <span className=" px-4 py-2 text-white rounded-[20px] bg-[#25AAE1]">
+                            {val}{" "}
+                          </span>
+                          <IoMdAdd
+                            onClick={() => addServiceCategory(index)}
+                            className="ms-2 cursor-pointer text-[25px] transition-all hover:text-[30px]"
+                          />
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex justify-end">
+                    <Button
+                      type={"submit"}
+                      onClick={onServiceCloseModal}
+                      className={"!px-12   !rounded-full"}
+                    >
+                      Publish
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
             <div className="ms-3 cursor-pointer space-x-4">
-              <button type="button" className="flex items-center mt-2 w-60">
+              <button
+                type="button"
+                onClick={onServiceOpenModal}
+                className="flex items-center mt-2 w-60"
+              >
                 <MdAddBox className="text-[#25AAE1] text-3xl" />
                 Add Another Service
               </button>
