@@ -51,7 +51,7 @@ function Location({
         >
           Remote
         </button>
-        <p className="text-sm text-gray-400 ml-1 mt-3.5 ml-5">
+        <p className="text-sm text-gray-400 mt-3.5 ms-5">
           (Hint: choose this option if you do not have a physical location)
         </p>
       </div>

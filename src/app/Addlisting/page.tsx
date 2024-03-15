@@ -204,7 +204,7 @@ function Page() {
         <Navigation title1={"Home"} title2={"Add listing"} />
 
 
-        <div className="xl:flex flex-wrap justify-center hidden  rounded-lg pt-5 pb-5 w-full sticky top-0 shadow-md bg-white z-10 xl:w-4/6 xl:gap-10 xl:block">
+        <div className="xl:flex flex-wrap justify-center hidden  rounded-lg pt-5 pb-5 w-full sticky top-0 shadow-md bg-white z-10 xl:w-4/6 xl:gap-10">
             <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 100, behavior: 'smooth' }); }} >About</h1>
             <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 1280, behavior: 'smooth' }); }}>Location</h1>
             <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 1925, behavior: 'smooth' }); }}>Hour</h1>
