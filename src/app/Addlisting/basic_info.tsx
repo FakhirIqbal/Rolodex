@@ -554,7 +554,7 @@ function BasicInfo({
                 <Button
                   type={"submit"}
                   onClick={onCloseModal}
-                  className={"!px-12   !rounded-full"}
+                  className={"!px-12 mt-4 !rounded-full"}
                 >
                   Publish
                 </Button>

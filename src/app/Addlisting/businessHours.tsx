@@ -96,8 +96,6 @@ function BusinessHours({
   const [closingHours, setClosingHours] = React.useState<any>(null);
   const [dropdownCount, setDropdownCount] = useState<any>(1);
 
-  console.log(days);
-
   useEffect(() => {
     const options = [];
     for (let hour = 0; hour < 24; hour++) {
@@ -107,7 +105,7 @@ function BusinessHours({
         options.push(`${formattedHour}:${formattedMinute}`);
       }
     }
-    setTimeOptions(options);
+    setTimeOptions([...options, "24:00"]);
   }, []);
 
   const handleCheckboxClick = (index: any) => {
@@ -124,6 +122,7 @@ function BusinessHours({
     }
   };
 
+
   return (
     <div className="">
       <h2 className="text-lg font-bold">Opening Hours</h2>
@@ -131,7 +130,7 @@ function BusinessHours({
         {days.map((v: any, i: any) => (
           <div key={i}>
             <h2 className="mt-2 font-bold">{v.day}</h2>
-            <div className="flex justify-between items-start flex-wrap mt-2">
+            <div className="flex justify-between flex-wrap mt-2">
               <div className="flex items-center mb-4">
                 <input
                   checked={v.isChecked}
@@ -143,17 +142,17 @@ function BusinessHours({
                   Closed
                 </label>
               </div>
-              <div className="flex">
+              <div className="flex w-96 justify-between min-w-96">
                 {!v.isChecked && (
                   <div className="flex flex-col">
                     {v.timing.map((timingItem: any, timingIndex: any) => (
-                      <div className="flex" key={timingIndex}>
+                      <div className="flex " key={timingIndex}>
                         <div className="flex flex-col mr-4">
                           <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
                             Opening hours
                           </label>
                           <Dropdown
-                            className="border-2 cursor-pointer hover:border-[#25AEE1] border-gray-200 rounded-lg w-full"
+                            className="w-full sm:w-40 border-2 cursor-pointer hover:border-[#25AEE1] border-gray-200 rounded-lg"
                             title="Select Time"
                             onChange={(openingHours: any) => {
                               const updatedDays = [...days];
@@ -164,27 +163,30 @@ function BusinessHours({
                             options={timeOptions}
                           />
                         </div>
-                        <div className="flex flex-col">
-                          <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
-                            Closing hours
-                          </label>
-                          <Dropdown
-                            className="border-2 cursor-pointer hover:border-[#25AEE1] border-gray-200 rounded-lg w-full"
-                            title="Select Time"
-                            onChange={(closingHours: any) => {
-                              const updatedDays = [...days];
-                              updatedDays[i].timing[timingIndex].closingHours =
-                                closingHours;
-                              setDays(updatedDays);
-                            }}
-                            options={timeOptions}
-                          />
-                        </div>
+                        {v.timing[0].openingHours != "24:00" && (
+                          <div className="flex flex-col">
+                            <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                              Closing hours
+                            </label>
+                            <Dropdown
+                              className="w-full sm:w-40 border-2 cursor-pointer hover:border-[#25AEE1] border-gray-200 rounded-lg"
+                              title="Select Time"
+                              onChange={(closingHours: any) => {
+                                const updatedDays = [...days];
+                                updatedDays[i].timing[
+                                  timingIndex
+                                ].closingHours = closingHours;
+                                setDays(updatedDays);
+                              }}
+                              options={timeOptions}
+                            />
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
                 )}
-                {!v.isChecked && (
+                {!v.isChecked && v.timing[0].openingHours != "24:00" &&  (
                   <div className="mt-8 ms-4 text-[25px] cursor-pointer hover:scale-110 hover:transition-all">
                     <IoAddSharp onClick={() => addDropdown(i)} />
                   </div>
