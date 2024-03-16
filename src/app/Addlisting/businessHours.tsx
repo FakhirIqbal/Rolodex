@@ -116,13 +116,8 @@ function BusinessHours({
     setDays(updatedWeekDays);
   };
 
-  //   const addDropdown = () => {
-  //     setDropdownCount((prevCount: any) => prevCount + 1);
-  //   };
-
   const addDropdown = (index: any) => {
     const updatedDays = [...days];
-    // Check if timing array already has an item
     if (updatedDays[index].timing.length === 1) {
       updatedDays[index].timing.push({ openingHours: "", closingHours: "" });
       setDays(updatedDays);
@@ -136,7 +131,7 @@ function BusinessHours({
         {days.map((v: any, i: any) => (
           <div key={i}>
             <h2 className="mt-2 font-bold">{v.day}</h2>
-            <div className="flex justify-between items-center flex-wrap mt-2">
+            <div className="flex justify-between items-start flex-wrap mt-2">
               <div className="flex items-center mb-4">
                 <input
                   checked={v.isChecked}
@@ -149,47 +144,51 @@ function BusinessHours({
                 </label>
               </div>
               <div className="flex">
-                <div className="flex flex-col">
-                  {v.timing.map((timingItem: any, timingIndex: any) => (
-                    <div className="flex" key={timingIndex}>
-                      <div className="flex flex-col mr-4">
-                        <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
-                          Opening hours
-                        </label>
-                        <Dropdown
-                          className="border-2 border-gray-200 rounded-lg w-full"
-                          title="Select Time"
-                          onChange={(openingHours: any) => {
-                            const updatedDays = [...days];
-                            updatedDays[i].timing[timingIndex].openingHours =
-                              openingHours;
-                            setDays(updatedDays);
-                          }}
-                          options={timeOptions}
-                        />
+                {!v.isChecked && (
+                  <div className="flex flex-col">
+                    {v.timing.map((timingItem: any, timingIndex: any) => (
+                      <div className="flex" key={timingIndex}>
+                        <div className="flex flex-col mr-4">
+                          <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            Opening hours
+                          </label>
+                          <Dropdown
+                            className="border-2 cursor-pointer hover:border-[#25AEE1] border-gray-200 rounded-lg w-full"
+                            title="Select Time"
+                            onChange={(openingHours: any) => {
+                              const updatedDays = [...days];
+                              updatedDays[i].timing[timingIndex].openingHours =
+                                openingHours;
+                              setDays(updatedDays);
+                            }}
+                            options={timeOptions}
+                          />
+                        </div>
+                        <div className="flex flex-col">
+                          <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                            Closing hours
+                          </label>
+                          <Dropdown
+                            className="border-2 cursor-pointer hover:border-[#25AEE1] border-gray-200 rounded-lg w-full"
+                            title="Select Time"
+                            onChange={(closingHours: any) => {
+                              const updatedDays = [...days];
+                              updatedDays[i].timing[timingIndex].closingHours =
+                                closingHours;
+                              setDays(updatedDays);
+                            }}
+                            options={timeOptions}
+                          />
+                        </div>
                       </div>
-                      <div className="flex flex-col">
-                        <label className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">
-                          Closing hours
-                        </label>
-                        <Dropdown
-                          className="border-2 border-gray-200 rounded-lg w-full"
-                          title="Select Time"
-                          onChange={(closingHours: any) => {
-                            const updatedDays = [...days];
-                            updatedDays[i].timing[timingIndex].closingHours =
-                              closingHours;
-                            setDays(updatedDays);
-                          }}
-                          options={timeOptions}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className=" flex items-center mt-4 ms-4 text-[25px] cursor-pointer hover:scale-110 hover:transition-all">
-                  <IoAddSharp onClick={() => addDropdown(i)} />
-                </div>
+                    ))}
+                  </div>
+                )}
+                {!v.isChecked && (
+                  <div className="mt-8 ms-4 text-[25px] cursor-pointer hover:scale-110 hover:transition-all">
+                    <IoAddSharp onClick={() => addDropdown(i)} />
+                  </div>
+                )}
               </div>
             </div>
           </div>

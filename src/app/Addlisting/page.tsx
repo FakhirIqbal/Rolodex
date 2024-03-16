@@ -208,8 +208,8 @@ function Page() {
             <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 120, behavior: 'smooth' }); }} >About</h1>
             <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 1300, behavior: 'smooth' }); }}>Location</h1>
             <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 1980, behavior: 'smooth' }); }}>Hour</h1>
-            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 3280, behavior: 'smooth' }); }}>Contact Me</h1>
-            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 3800, behavior: 'smooth' }); }}>More</h1>
+            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 2850, behavior: 'smooth' }); }}>Contact Me</h1>
+            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 3310, behavior: 'smooth' }); }}>More</h1>
 
         </div>
 
