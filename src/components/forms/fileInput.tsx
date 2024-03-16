@@ -55,7 +55,7 @@ const FileInput = ({
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         style={{boxShadow: "0px 0px 20px #25AEE1 inset"}}
-        className={`mt-4 border-2 bg-gray-300 shadow-[#25AEE1] w-50 sm:w-60 h-[150px] px-4 p-1 flex flex-col items-center justify-center rounded-xl gap-2 ${
+        className={`mt-4 border-2 bg-gray-100 shadow-[#25AEE1] w-50 sm:w-60 h-[150px] px-4 p-1 flex flex-col items-center justify-center rounded-xl gap-2 ${
           isDragging ? "border-primary" : ""
         }`}
       >
@@ -78,7 +78,7 @@ const FileInput = ({
               onClick={() => {
                 handleImageClick(fileInputRef, selectedImage);
               }}
-              className={"!rounded-full !bg-none !text-sm !bg-gray-300 flex items-center flex-col justify-center"}
+              className={"!rounded-full !bg-none !text-sm !bg-gray-100 flex items-center flex-col justify-center"}
             >
               <IoMdImages className="text-4xl text-black" />
             </Button>

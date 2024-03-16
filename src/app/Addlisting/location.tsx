@@ -17,7 +17,7 @@ function Location({
 }: any) {
   const [location, setLocation] = useState("");
   const [areaLocation, setLocationarea] = useState<string>("");
-  console.log(location);
+
   const handleRemoteClick = () => {
     setLocationarea("remote");
   };

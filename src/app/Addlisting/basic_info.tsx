@@ -23,6 +23,7 @@ import ProductTextFeild from "@/components/forms/ProductTextField";
 import ProductImageInput from "@/components/forms/productImageIput";
 import Button from "@/components/ui/Button";
 import ServiceTextFeild from "@/components/forms/serviceTextField";
+import { FaMinus } from "react-icons/fa6";
 
 function BasicInfo({
   register,
@@ -194,7 +195,19 @@ function BasicInfo({
   };
 
   const addDropdown = () => {
-    setDropdownCount((prevCount) => prevCount + 1); // Increment dropdown count
+    setDropdownCount((prevCount) => prevCount + 1);
+  };
+
+  const removeDropdown = (indexToRemove: any) => {
+    console.log(indexToRemove);
+    setDropdownCount((prevCount: any) => prevCount - 1);
+    // setDropdownCount((prevCount: any) => {
+    //   console.log(prevCount)
+    //   const updatedCount = prevCount.filter(
+    //     (_: any, index: any) => index !== indexToRemove
+    //   );
+    //   return updatedCount;
+    // });
   };
 
   return (
@@ -247,20 +260,31 @@ function BasicInfo({
           </p>
 
           <div className="flex flex-wrap">
-            <div className=" w-full sm:w-[50%] ">
+            <div className=" w-full sm:w-[50%]">
               {[...Array(dropdownCount)].map((_, index) => (
-                <Dropdown
-                  key={index}
-                  error={errors?.category?.message}
-                  className={
-                    "border-2 border-gray-200 sm:w-[100%]  w-full rounded-lg "
-                  }
-                  title={"Accommodation"}
-                  onChange={(selectedOption: any) =>
-                    updateDropdownValue("category", selectedOption)
-                  }
-                  options={categories}
-                />
+                <div className="flex items-center mt-2">
+                  <Dropdown
+                    key={index}
+                    error={errors?.category?.message}
+                    className={
+                      "border-2 border-gray-200 sm:w-[100%]  w-full rounded-lg "
+                    }
+                    title={"Accommodation"}
+                    onChange={(selectedOption: any) =>
+                      updateDropdownValue("category", selectedOption)
+                    }
+                    options={categories}
+                  />
+                  {index !== 0 && (
+                    <button className="flex cursor-pointer absolute left-1/3">
+                      <FaMinus
+                        className=" ms-8 rounded-sm p-auto text-2xl text-white bg-[#25AEE1] "
+                        onClick={() => removeDropdown(index)}
+                      />
+                      <span className="ms-1">Remove Category</span>
+                    </button>
+                  )}
+                </div>
               ))}
             </div>
             <div className="ms-3 cursor-pointer">
@@ -319,7 +343,7 @@ function BasicInfo({
                 watch={watch}
               /> */}
           <span className="text-gray-400 text-md">I am a</span>
-          <div>
+          <div className="mt-2">
             <label className="inline-flex items-center sm:space-x-4">
               <input
                 type="radio"
@@ -614,7 +638,10 @@ function BasicInfo({
                     </div>
                     <div className="">
                       {selectedCategories.map((val: any, index: any) => (
-                        <span key={index} className="flex items-center my-2 w-fit">
+                        <span
+                          key={index}
+                          className="flex items-center my-2 w-fit"
+                        >
                           <span className=" px-4 py-2 text-white rounded-[20px] bg-[#25AAE1]">
                             {val}{" "}
                           </span>

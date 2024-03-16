@@ -23,6 +23,74 @@ import ImageInput from "@/components/forms/imageInput";
 import RadioInput from "@/components/forms/radioinput";
 import More from "./more";
 function Page() {
+  const aboutRef = useRef<HTMLHeadingElement>(null);
+  const locationRef = useRef<HTMLHeadingElement>(null);
+  const hourRef = useRef<HTMLHeadingElement>(null);
+  const contactRef = useRef<HTMLHeadingElement>(null);
+  const moreRef = useRef<HTMLHeadingElement>(null);
+
+  const elementRef = useRef(null);
+
+  const handleClick = (ref: React.RefObject<HTMLHeadingElement>) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries: any) => {
+      entries.forEach((entry: any) => {
+        if (entry.isIntersecting) {
+          // Handle intersection logic if needed
+        } else {
+          console.log("Element is not visible");
+        }
+      });
+    });
+
+    if (aboutRef.current) {
+      observer.observe(aboutRef.current);
+    }
+
+    if (locationRef.current) {
+      observer.observe(locationRef.current);
+    }
+
+    if (hourRef.current) {
+      observer.observe(hourRef.current);
+    }
+
+    if (contactRef.current) {
+      observer.observe(contactRef.current);
+    }
+
+    if (moreRef.current) {
+      observer.observe(moreRef.current);
+    }
+
+    return () => {
+      if (aboutRef.current) {
+        observer.unobserve(aboutRef.current);
+      }
+
+      if (locationRef.current) {
+        observer.unobserve(locationRef.current);
+      }
+
+      if (hourRef.current) {
+        observer.unobserve(hourRef.current);
+      }
+
+      if (contactRef.current) {
+        observer.unobserve(contactRef.current);
+      }
+
+      if (moreRef.current) {
+        observer.unobserve(moreRef.current);
+      }
+    };
+  }, []);
+
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setIsLoading(false);
@@ -127,18 +195,18 @@ function Page() {
       }
     }
   };
-  const [selectedImage1, setSelectedImage1] = useState<any>();
-  const [selectedImage2, setSelectedImage2] = useState<any>();
-  const [selectedImage3, setSelectedImage3] = useState<any>();
-  const [selectedImage4, setSelectedImage4] = useState<any>();
-  const [getImage, setImage] = useState<any>(null);
-  const fileInputRef1 = useRef<any>(null);
-  const fileInputRef2 = useRef<any>(null);
-  const fileInputRef3 = useRef<any>(null);
-  const fileInputRef4 = useRef<any>(null);
-  const handleImageClick = (fileInputRef: any) => {
-    fileInputRef?.current?.click();
-  };
+  // const [selectedImage1, setSelectedImage1] = useState<any>();
+  // const [selectedImage2, setSelectedImage2] = useState<any>();
+  // const [selectedImage3, setSelectedImage3] = useState<any>();
+  // const [selectedImage4, setSelectedImage4] = useState<any>();
+  // const [getImage, setImage] = useState<any>(null);
+  // const fileInputRef1 = useRef<any>(null);
+  // const fileInputRef2 = useRef<any>(null);
+  // const fileInputRef3 = useRef<any>(null);
+  // const fileInputRef4 = useRef<any>(null);
+  // const handleImageClick = (fileInputRef: any) => {
+  //   fileInputRef?.current?.click();
+  // };
 
   const handleFileChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -194,28 +262,59 @@ function Page() {
       </div>
     );
   }
-  
-  
-  
+
+
   return (
     <main>
       <NavBar />
       <div className="max-w-[1240px]  mx-auto mb-40 p-4 xl:p-0">
         <Navigation title1={"Home"} title2={"Add listing"} />
 
-
-        <div className="xl:flex flex-wrap justify-center hidden  rounded-lg pt-5 pb-5 w-full sticky top-0 shadow-md bg-white z-10 xl:w-4/6 xl:gap-10">
-            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 120, behavior: 'smooth' }); }} >About</h1>
-            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 1300, behavior: 'smooth' }); }}>Location</h1>
-            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 1980, behavior: 'smooth' }); }}>Hour</h1>
-            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 2850, behavior: 'smooth' }); }}>Contact Me</h1>
-            <h1 className="text-sm font-bold cursor-pointer sm:text-sm" onClick={() => { window.scrollTo({ top: 3310, behavior: 'smooth' }); }}>More</h1>
-
+        <div>
+          <div className="xl:flex flex-wrap justify-center hidden rounded-lg pt-5 pb-5 w-full sticky top-0 shadow-md bg-white z-10 xl:w-4/6 xl:gap-10">
+            <h1
+              ref={aboutRef}
+              className="text-sm font-bold cursor-pointer sm:text-sm"
+              onClick={() => handleClick(aboutRef)}
+            >
+              About
+            </h1>
+            <h1
+              ref={locationRef}
+              className="text-sm font-bold cursor-pointer sm:text-sm"
+              onClick={() => handleClick(locationRef)}
+            >
+              Location
+            </h1>
+            <h1
+              ref={hourRef}
+              className="text-sm font-bold cursor-pointer sm:text-sm"
+              onClick={() => handleClick(hourRef)}
+            >
+              Hour
+            </h1>
+            <h1
+              ref={contactRef}
+              className="text-sm font-bold cursor-pointer sm:text-sm"
+              onClick={() => handleClick(contactRef)}
+            >
+              Contact Me
+            </h1>
+            <h1
+              ref={moreRef}
+              className="text-sm font-bold cursor-pointer sm:text-sm"
+              onClick={() => handleClick(moreRef)}
+            >
+              More
+            </h1>
+          </div>
+          {/* Rest of your component */}
         </div>
 
         <div className="sm:grid sm:grid-cols-3 flex flex-col-reverse gap-4 ">
           <form onSubmit={handleSubmit(onSubmit)} className="col-span-2 mt-4">
             <BasicInfo
+            ref={aboutRef}
               watch={watch}
               register={register}
               getValues={getValues}
@@ -223,6 +322,7 @@ function Page() {
               updateDropdownValue={updateDropdownValue}
             />
             <Location
+            ref={locationRef}
               watch={watch}
               Values={getValues}
               register={register}
@@ -230,12 +330,12 @@ function Page() {
               updateDropdownValue={updateDropdownValue}
             />
             <div className="flex flex-col space-y-6 rounded-lg shadow-md p-6 mt-12">
-            <BusinessHours />
+              <BusinessHours ref={hourRef} />
             </div>
-            
-            <Contactdetail register={register} errors={errors} />
 
-              <More/>
+            <Contactdetail ref={contactRef} register={register} errors={errors} />
+
+            <More />
 
             <div className="flex gap-4 mt-20">
               <Button type={"submit"} className={"!px-12   !rounded-full"}>
